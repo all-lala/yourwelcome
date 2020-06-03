@@ -1,0 +1,8 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+index:
+    path: /{vueRouting}
+    controller: App\Controller\IndexController::index
+    requirements: 
+      vueRouting: "^(?!api|_(profiler|wdt)).*"

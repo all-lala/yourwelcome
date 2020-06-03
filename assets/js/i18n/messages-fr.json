@@ -1,0 +1,277 @@
+{
+  "siteName": "YourWelcome",
+  "home": {
+    "layout": {
+      "enter": "Entrer",
+      "disconnect": "Se déconnecter",
+      "back": "Retour",
+      "connect": "Se connecter",
+      "subscribe": "Créer un compte"
+    },
+    "register": {
+      "title": "Création du compte",
+      "user": "Utilisateur",
+      "email": "e-mail",
+      "password": "Mot de passe",
+      "passwordValidator": "Vérification de mot de passe",
+      "wedding": "Mariage",
+      "name": "nom",
+      "date": "Date prévue",
+      "inProgress": "Création de votre mariage en cours",
+      "waiting": "Veuillez patientez quelques instants ...",
+      "successMsg": "Félicitation vous avez créé votre accueil de mariage.",
+      "connectMsg": "Vous allez être connecté dans quelques instants",
+      "btn": {
+        "cancel": "Annuler",
+        "valid": "Valider"
+      },
+      "error": {
+        "eMailExists": "E-mail requis.",
+        "eMailIsValid": "E-mail non valide.",
+        "eMailAlreadyUsed": "Le nom d'utilisateur existe déjà",
+        "passwordExists": "Mot de passe requis.",
+        "passwordLength": "Le mot de passe doit faire plus de 12 caractères.",
+        "passwordEquals": "Les mots de passes sont différents.",
+        "mariageNameExists": "Le mariage doit avoir un nom pour exister.",
+        "dateExists": "Veuillez indiquer une date de mariage (approximative si non connue).",
+        "dateIsValid": "La date fournie n'est pas valide."
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "email": "e-mail",
+      "password": "Mot de passe",
+      "error": "Utilisateur ou mot de passe incorrect!",
+      "btn": {
+        "valid": "Valider"
+      }
+    },
+    "subtitle": "Votre aventure commence ici",
+    "history": {
+      "title": "Une journée pas comme les autres",
+      "message": [
+        "A cérémonie exeptionnelle, accueil exeptionnel!",
+        "C'est dans les détails que l'on créé les plus beaux souvenirs",
+        "et l'accueil de votre cérémonie sera celui qui accompagnera votre journée.",
+        "Quelque soit votre thème et le réve que vous avez",
+        "nous pouvons créer l'accueil et les accessoires",
+        "qui guideront vos invités à leurs tables ou dans la soirée."
+      ],
+      "footer": "Alors quel sera votre accueil?"
+    },
+    "features": {
+      "title": "Création libre et gratuite",
+      "features": [
+        {
+          "icon": "mdi-lightbulb-on-outline",
+          "title": "Créez",
+          "text": "Vous choisissez un thème, une animation de réussite, des tables et dressez votre liste d'invité. C'est simple et rapide et vous pouvez tout changer à tout moment."
+        },
+        {
+          "icon": "mdi-test-tube",
+          "title": "Testez",
+          "text": "Pas certain de vos choix, pas de soucis vous pouvez à tout moment tester et modifer le résultat final en simulant l'arrivée d'un invité."
+        },
+        {
+          "icon": "mdi-airplane-takeoff",
+          "title": "Commandez",
+          "text": "Tout est prèt et vous êtes satisfait du résultat, vous pouvez maintenant commander votre réalisation et choisir les options de livraison et de location du matériel."
+        }
+      ]
+    }
+  },
+  "configLayout": {
+    "preTitle": "Mariage",
+    "preview": "Aperçu",
+    "disconnect": "Se déconnecter",
+    "year": "2020",
+    "trademark": "All-lala",
+    "config": {
+      "title": "Configuration",
+      "subtitle": "générale"
+    },
+    "guest": {
+      "title": "Liste des invités",
+      "subtitle": "Pas d'invité | {count} invité | {count} invités"
+    },
+    "table": {
+      "title": "Liste des Tables",
+      "subtitle": "Pas de table | {count} table | {count} tables",
+      "add": "Ajouter"
+    }
+  },
+  "config": {
+    "title": "Configurations",
+    "btn": {
+      "reload": "Recharger",
+      "save": "Sauvegarder"
+    },
+    "submenu": {
+      "mariage": {
+        "title": "Mariage",
+        "form": {
+          "name": "nom",
+          "date": "Date prévue",
+          "dateModal": {
+            "btn": {
+              "cancel": "Annuler",
+              "valid": "Valider"
+            }
+          }
+        }
+      },
+      "themeChoice": {
+        "title": "Choix du thème"
+      },
+      "themeConfig": {
+        "title": "Configuration du theme"
+      },
+      "successAnimationChoice": {
+        "title": "Choix de l'animation de réussite"
+      },
+      "successAnimationConfig": {
+        "title": "Configuration de l'animation"
+      }
+    }
+  },
+  "homeSite": {
+    "welcome": {
+      "title": "Bienvenu",
+      "message": [
+        "Sur ce site vous allez pourvoir créer votre accueil de mariage à diffuser le jour J.",
+        "Cet accueil fonctionne sur le principe de l'autentification des invités par un badge magnétique.",
+        "Un invité qui est placé à une table et qui sidentifie avec son badge va déclencher l'animation du thème qui enchainera ensuite l'animation de réussite.",
+        "",
+        "Vous trouverez, ci-dessous, de l'aide pour configurer au mieux votre accueil."
+      ]
+    }
+  },
+  "help": {
+    "title": "Aide",
+    "config": {
+      "title": "Configuration",
+      "subtitle": "La configuration se fait en quelques étapes essentielles que vous pourrez faire dans l'ordre que vous souhaitez.",
+      "submenu": {
+        "theme": {
+          "title": "1- Thème",
+          "messages": [
+            [
+              "Le thème est l'animation qui se présentera en premier sur l'écran d'accueil du mariage.",
+              "Cette animation peut être statique ou dynamique et peut faire référence aux images des tables."
+            ],
+            ["Dans le menu de gauche, choisisez la configuration générale."],
+            [
+              "Déployez le choix du thème et sélectionner un de ceux disponibles."
+            ],
+            ["Déployez la configuration du thème et configurez le."]
+          ]
+        },
+        "successAnimation": {
+          "title": "2- Animation de réussite",
+          "messages": [
+            [
+              "L'animation de réussite est celle qui sera jouée après que l'animation du thème soit terminée."
+            ],
+            ["Dans le menu de gauche, choisisez la configuration générale."],
+            [
+              "Déployez le choix de l'animation de réussite et sélectionner une de celles disponibles"
+            ],
+            [
+              "Déployez la configuration de l'animation de réussite et configurez la."
+            ]
+          ]
+        },
+        "guest": {
+          "title": "3- Liste des invités",
+          "messages": [
+            ["Dans le menu de gauche, choisisez la liste des invités."],
+            [
+              "Ici vous pouvez Ajouter, supprimé, ou modifier chaque invité au mariage."
+            ],
+            ["Le numéro de badge servira à identifer l'invité."]
+          ]
+        },
+        "table": {
+          "title": "4- Tables",
+          "messages": [
+            [
+              "Dans le menu de gauche, choisisez une table ou ajouter pour en ajouter une."
+            ],
+            [
+              "Pensez a ajouter une image et une couleur de fond pour la table."
+            ],
+            [
+              "L'image pourra être utilisé par le théme ou/et l'animation de réussite,",
+              "Pensez à la dimentionner en conséquence (exemple: pour le théme \"Machine à sous\" le format devra être carré)",
+              "Lors de la modification vous pourrez ajouter des invités à la table.",
+              "Si l'invité est déjà présent sur une autre table il sera déplacé vers celle-ci."
+            ]
+          ]
+        },
+        "saveMessage": "N'oubliez pas de sauvegarder vos modifications."
+      }
+    },
+    "preview": {
+      "title": "Aperçu",
+      "warning": "Non présent sur l'export",
+      "messages": [
+        [
+          "Un aperçu de votre réalisation est disponile dans le menu en haut a droite."
+        ],
+        ["Dans cet apeçu un menu est présent en haut à gauche."],
+        [
+          "Ce menu permet de simuler l'identification d'un invité présent à une table.",
+          "Un clic sur le nom de l'invité lancera les animations configurés."
+        ]
+      ]
+    }
+  },
+  "guest": {
+    "title": "Liste des invités",
+    "table": {
+      "firstname": "Nom",
+      "lastname": "Prénom",
+      "table": "Table",
+      "badge": "Badge",
+      "actions": "Actions"
+    },
+    "modal": {
+      "title": {
+        "add": "Ajouter un invité",
+        "update": "Modifier un invité"
+      },
+      "firstname": "Nom",
+      "lastname": "Prénom",
+      "badge": "Badge",
+      "table": "Sélectionnez une table",
+      "btn": {
+        "cancel": "Annuler",
+        "add": "Ajouter",
+        "update": "Modifier"
+      },
+      "badgeError": "Le badge est déjà attribué à {firstname} {lastname}"
+    }
+  },
+  "table": {
+    "title": {
+      "add": "Ajouter une nouvelle table",
+      "update": "Configuration de la table \"{name}\""
+    },
+    "name": "Nom",
+    "img": "Image de la table",
+    "color": "Couleur de fond",
+    "guest": {
+      "title": "Invités à la table",
+      "add": "Ajouter un invité",
+      "empty": "Aucun invité à ajouter",
+      "atTable": " - A la table \"{name}\""
+    },
+    "btn": {
+      "delete": "Supprimer",
+      "reload": "Recharger",
+      "save": "Savegarder",
+      "add": "Ajouter"
+    },
+    "deleteConfirm" : "Voulez-vous réellement supprimer la table?"
+  }
+}
