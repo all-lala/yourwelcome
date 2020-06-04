@@ -31,9 +31,13 @@
 <script lang="ts">
 import TemplateVictory from '../Template/TemplateVictory.vue';
 import Component from 'vue-class-component';
+import FireworkAnimation from './Animation/FireworkAnimation.vue';
 
 @Component({
   name: 'Firework',
+  components: {
+    FireworkAnimation
+  }
 })
 export default class Firework extends TemplateVictory {
   private texts = this.convertedText(this.getConfig('text'));

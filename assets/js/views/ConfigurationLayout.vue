@@ -75,7 +75,7 @@
             <v-list-item-title>
               <h2>{{ $t('configLayout.table.title') }}</h2>
             </v-list-item-title>
-            <v-list-item-subtitle>{{ $tc('configLayout.table.subtitle', table && tables.length || 0) }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ $tc('configLayout.table.subtitle', tables && tables.length || 0) }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
