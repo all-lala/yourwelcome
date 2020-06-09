@@ -6,7 +6,6 @@ import store from './store';
 import vuetify from './plugins/vuetify';
 import Vuex from 'vuex';
 import i18n from './i18n/i18n';
-import axios from 'axios';
 
 Vue.config.productionTip = false;
 
