@@ -1,5 +1,6 @@
 import Vue, { PluginObject } from 'vue';
 import axios, { AxiosRequestConfig } from 'axios';
+import AuthUtils from '@/utils/auth.utils';
 declare var BASE_URL: any;
 
 // Full config:  https://github.com/axios/axios#request-config
@@ -9,32 +10,42 @@ declare var BASE_URL: any;
 
 const config: AxiosRequestConfig = {
   baseURL: `${BASE_URL}api` || '',
-  // validateStatus: () => true
 };
 
-// eslint-disable-next-line no-underscore-dangle
 const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
-  cfg =>
-    // Do something before request is sent
-    // eslint-disable-next-line implicit-arrow-linebreak
-    cfg,
+  cfg => {
+    // Reload token from localstorage
+    if (AuthUtils.isAuthenticated()) {
+      cfg.headers.common.Authorization = `Bearer ${AuthUtils.getTocken()}` 
+    }
+    return cfg;
+  },
+  err => Promise.reject(err)
+);
+
+_axios.interceptors.response.use(
+  res => {
+    return res
+  },
   err =>
-    // Do something with request error
-    // eslint-disable-next-line implicit-arrow-linebreak
-    Promise.reject(err)
-  ,
+    {
+      // Suppress token when unautorized
+      if (err.response.status === 401 && !!AuthUtils.getTocken()) {
+        AuthUtils.disconnect();
+        window.location.reload();
+      }
+      return Promise.reject(err)
+    }
 );
 
 const Plugin: PluginObject<any> = {
   install: (vue) => {
-    // eslint-disable-next-line no-param-reassign
     vue.$axios = _axios;
   },
 };
 Plugin.install = (vue) => {
-  // eslint-disable-next-line no-param-reassign
   vue.$axios = _axios;
   window.axios = _axios;
   Object.defineProperties(Vue.prototype, {

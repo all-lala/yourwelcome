@@ -46,6 +46,7 @@ import Vue from 'vue';
 import { Prop, Component } from 'vue-property-decorator';
 import Urls from '@/utils/urls';
 import User from '@/models/user.model';
+import AuthUtils from '@/utils/auth.utils';
 
 @Component({
   name: 'Login',
@@ -68,28 +69,21 @@ export default class Login extends Vue {
    * Validation de l'utilisarteur
    */
   valid() {
-    try {
-      const request = this.$axios
-        .post(Urls.AUTH, this.user)
-        .then((response) => {
-          if (response && response.data && response.data.token) {
-            sessionStorage.setItem('Authorization', response.data.token);
-            this.$axios.defaults.headers.common = {
-              Authorization: `Bearer ${response.data.token}`,
-            };
-            this.$router.push(this.redirection);
-          } else {
-            console.error('Response error!')
-            this.error = true;
-          }
-        })
-        .catch((error) => {
-          console.log(error.response);
+    this.$axios
+      .post(Urls.AUTH, this.user)
+      .then((response) => {
+        if (response && response.data && response.data.token) {
+          AuthUtils.setToken(response.data.token);
+          this.$router.push(this.redirection);
+        } else {
+          console.error('Response error!')
           this.error = true;
-        });
-    } catch (e) {
-      console.log(e);
-    }
+        }
+      })
+      .catch((error) => {
+        console.log(error.response);
+        this.error = true;
+      });
   }
 }
 </script>
