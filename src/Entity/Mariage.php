@@ -6,12 +6,21 @@ use App\Repository\MariageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * ExclusionPolicy("All")
  * @ORM\Entity(repositoryClass=MariageRepository::class)
+ * @ApiResource(
+ *     itemOperations={
+ *         "get"={"security"="is_granted('ROLE_USER') and is_granted('VIEW', object)", "security_message"="Sorry, but you are not the wedding owner."},
+ *         "put"={"security_post_denormalize"="is_granted('ROLE_USER') or is_granted('EDIT', object)", "security_post_denormalize_message"="Sorry, but you are not the actual wedding owner."}
+*      },
+ *     normalizationContext={"groups"={"mariage", "mariage_read"}},
+ *     denormalizationContext={"groups"={"mariage"}}
+ * )
  */
 class Mariage
 {
@@ -19,6 +28,7 @@ class Mariage
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"mariage_read"})
      */
     private $id;
 
@@ -26,6 +36,7 @@ class Mariage
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
      * @Assert\NotBlank()
+     * @Groups({"mariage", "write"})
      */
     private $nom;
 
@@ -33,48 +44,46 @@ class Mariage
      * @ORM\Column(type="date")
      * @Assert\NotNull()
      * @Assert\NotBlank()
-     * @JMS\Type("DateTime<'Y-m-d'>")
+     * @Groups({"mariage", "write"})
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"mariage"})
      */
     private $localisation;
 
     /**
      * @ORM\OneToMany(targetEntity=Invite::class, mappedBy="mariage", orphanRemoval=true)
-     * @JMS\Exclude()
      */
     private $invites;
 
     /**
      * @ORM\OneToMany(targetEntity=Table::class, mappedBy="mariage", orphanRemoval=true)
-     * @JMS\Exclude()
      */
     private $tables;
 
     /**
      * @ORM\OneToMany(targetEntity=Configuration::class, mappedBy="mariage", orphanRemoval=true, cascade={"persist", "remove"})
-     * @JMS\MaxDepth(1)
+     * @Groups({"mariage"})
      */
     private $configurations;
 
     /**
      * @ORM\OneToMany(targetEntity=ConfigurationTheme::class, mappedBy="mariage", orphanRemoval=true, cascade={"persist", "remove"})
-     * @JMS\MaxDepth(2)
+     * @Groups({"mariage"})
      */
     private $configurationsTheme;
     
     /**
      * @ORM\OneToMany(targetEntity=ConfigurationVictoire::class, mappedBy="mariage", orphanRemoval=true, cascade={"persist", "remove"})
-     * @JMS\MaxDepth(2)
+     * @Groups({"mariage"})
      */
     private $configurationsVictoire;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="mariage")
-     * @JMS\Exclude
      */
     private $users;
 
@@ -84,6 +93,7 @@ class Mariage
         $this->tables = new ArrayCollection();
         $this->configurations = new ArrayCollection();
         $this->configurationsTheme = new ArrayCollection();
+        $this->configurationsVictoire = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -229,7 +239,7 @@ class Mariage
         return $this->configurationsTheme;
     }
 
-    public function addConfigurationTheme(ConfigurationTheme $configurationTheme): self
+    public function addConfigurationsTheme(ConfigurationTheme $configurationTheme): self
     {
         if (!$this->configurationsTheme->contains($configurationTheme)) {
             $this->configurationsTheme[] = $configurationTheme;
@@ -239,7 +249,7 @@ class Mariage
         return $this;
     }
 
-    public function removeConfigurationTheme(ConfigurationTheme $configurationTheme): self
+    public function removeConfigurationsTheme(ConfigurationTheme $configurationTheme): self
     {
         if ($this->configurationsTheme->contains($configurationTheme)) {
             $this->configurationsTheme->removeElement($configurationTheme);
@@ -260,7 +270,7 @@ class Mariage
         return $this->configurationsVictoire;
     }
 
-    public function addConfigurationVictoire(ConfigurationVictoire $configurationVictoire): self
+    public function addConfigurationsVictoire(ConfigurationVictoire $configurationVictoire): self
     {
         if (!$this->configurationsVictoire->contains($configurationVictoire)) {
             $this->configurationsVictoire[] = $configurationVictoire;
@@ -270,7 +280,7 @@ class Mariage
         return $this;
     }
 
-    public function removeConfigurationVictoire(ConfigurationVictoire $configurationVictoire): self
+    public function removeConfigurationsVictoire(ConfigurationVictoire $configurationVictoire): self
     {
         if ($this->configurationsVictoire->contains($configurationVictoire)) {
             $this->configurationsVictoire->removeElement($configurationVictoire);

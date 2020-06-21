@@ -1,4 +1,7 @@
 export default class Victory {
+
+  public '@id'?: string;
+  
   public name?: string;
 
   public label?: string;

@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -44,7 +43,6 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Mariage::class, inversedBy="users", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @JMS\MaxDepth(1)
      * @Assert\NotNull()
      */
     private $mariage;

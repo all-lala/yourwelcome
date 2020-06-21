@@ -229,9 +229,7 @@ export default class TableView extends Vue {
    * Retourne l'url de l'imag de la table
    */
   get imageUrl() {
-    return this.table.realImg
-      ? this.table.realImg.toDataURL()
-      : this.table.image && `${this.tableImgFolder}${this.table.image}`;
+    return this.table.image && `${this.tableImgFolder}${this.table.image}`;
   }
 
   /**

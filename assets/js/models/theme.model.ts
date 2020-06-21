@@ -1,4 +1,7 @@
 export default class Theme {
+
+  public '@id'?: string;
+  
   public name?: string;
 
   public label?: string;

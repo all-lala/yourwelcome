@@ -4,33 +4,41 @@ namespace App\Entity;
 
 use App\Repository\ConfigurationThemeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ConfigurationThemeRepository::class)
+ * @ApiResource
  */
 class ConfigurationTheme
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=50)
+     * @Groups({"mariage"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"mariage"})
      */
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Theme::class)
+     * @ORM\Id()
+     * @ORM\ManyToOne(targetEntity=Theme::class, inversedBy="configurationsTheme")
      * @ORM\JoinColumn(name="theme", referencedColumnName="name", nullable=false)
+     * @Groups({"mariage"})
      */
     private $theme;
 
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity=Mariage::class, inversedBy="configurationsTheme")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
      */
     private $mariage;
 

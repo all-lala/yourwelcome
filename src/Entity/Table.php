@@ -6,12 +6,22 @@ use App\Repository\TableRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TableRepository::class)
  * @ORM\Table(name="`table`")
+ * @ApiResource(
+ *     itemOperations={
+ *         "get"={"security"="is_granted('ROLE_USER') and is_granted('VIEW', object)", "security_message"="Sorry, but you are not the Table owner."},
+ *         "put"={"security_post_denormalize"="is_granted('ROLE_USER') or is_granted('EDIT', object)", "security_post_denormalize_message"="Sorry, but you are not the actual Table owner."},
+ *         "delete"={"security"="is_granted('ROLE_USER') and is_granted('DELETE', object)", "security_message"="Sorry, but you are not the Table owner."}
+*      },
+ *     normalizationContext={"groups"={"table", "table_read"}},
+ *     denormalizationContext={"groups"={"table"}}
+ * )
  */
 class Table
 {
@@ -19,6 +29,7 @@ class Table
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"table_read"})
      */
     private $id;
 
@@ -26,29 +37,33 @@ class Table
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull()
      * @Assert\NotBlank()
+     * @Groups({"table"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"table"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string", length=9, nullable=true)
+     * @Groups({"table"})
      */
     private $couleur;
 
     /**
      * @ORM\ManyToOne(targetEntity=Mariage::class, inversedBy="tables")
      * @ORM\JoinColumn(nullable=false)
-     * @JMS\Exclude
      * @Assert\NotNull()
+     * @Groups({"table"})
      */
     private $mariage;
 
     /**
      * @ORM\OneToMany(targetEntity=Invite::class, mappedBy="tableReserve", orphanRemoval=false)
+     * @Groups({"table"})
      */
     private $invites;
 

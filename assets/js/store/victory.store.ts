@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Victory from "@/models/victory.model";
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
 import Urls from '@/utils/urls';
+import VictoryService from '@/service/victory.service';
 
 interface VictoryStoreState {
   victories: Victory[];
@@ -33,7 +34,7 @@ export default class VictoryStore implements Module<VictoryStoreState, any> {
 
   actions: ActionTree<VictoryStoreState, any> = {
     loadVictories(context) {
-      Vue.$axios.get(`${Urls.VICTORY}`).then(response => context.commit('victories', response.data));
+      VictoryService.getVictories().then(victories => context.commit('victories', victories));
     },
   }
 }

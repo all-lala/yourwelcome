@@ -6,9 +6,6 @@ use App\Entity\Mariage;
 use App\Repository\MariageRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
-use JMS\Serializer\SerializerInterface;
-use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
-use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
 
 /**
  * Description of MariageService
@@ -21,22 +18,19 @@ class MariageService {
     
     private $validator;
     
-    private $s;
-    
-    public function __construct(SerializerInterface $serializer, MariageRepository $repository, ValidatorRestService $validator) {
+    public function __construct(MariageRepository $repository, ValidatorRestService $validator) {
         $this->repository = $repository;
         $this->validator = $validator;
-        $this->s= $serializer;
     }
     
     /**
      * Retourne un mariage
      *
      * @param int $mariageId
-     * @return Mariage
+     * @return Mariage[]
      */
-    public function getMariage(int $mariageId) : Mariage {
-        return $this->repository->find($mariageId);
+    public function getMariage(int $mariageId): Array {
+        return $this->repository->findBy(['id' => $mariageId]);
     }
     
     

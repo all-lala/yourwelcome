@@ -1,6 +1,9 @@
 import Table from './table.model';
 
 export default class Invite {
+
+  public iri?: string;
+  
   public id?: number;
 
   public nom?: string;
