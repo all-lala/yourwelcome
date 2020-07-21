@@ -1,15 +1,16 @@
 <?php
 namespace App\Controller;
 
-use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations\Post;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\ImageService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ImageController extends AbstractFOSRestController
+class ImageController extends AbstractController
 {
     
     /**
@@ -21,7 +22,7 @@ class ImageController extends AbstractFOSRestController
     public function saveImage(ImageService $imageService, Request $request, string $type) {
         $mariageId = $this->getUser()->getMariage()->getId();
         $image = $request->files->get('image');
-        return $imageService->saveImage($image, $type, $mariageId);
+        return $this->json($imageService->saveImage($image, $type, $mariageId));
     }
 }
 

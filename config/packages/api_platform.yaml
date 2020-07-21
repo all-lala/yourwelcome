@@ -1,0 +1,16 @@
+api_platform:
+    collection:
+        pagination:
+            enabled: false
+    path_segment_name_generator: 'App\Operation\SingularPathSegmentNameGenerator'
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+#    patch_formats:
+#        jsonld: ['application/ld+json']
+#        json: ['application/json']
+    swagger:
+        versions: [3]
+        api_keys:
+             apiKey:
+                name: Authorization
+                type: header

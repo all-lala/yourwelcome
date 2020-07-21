@@ -5,6 +5,7 @@ import Mariage from '@/models/mariage.model';
 import ConfigurationsTheme from '@/models/configurationsTheme.model';
 import ConfigurationsVictoire from '@/models/configurationsVictoire.model';
 import Configuration from '@/models/configuration.model';
+import MariageService from '@/service/mariage.service';
 declare var BASE_URL: any;
 
 interface MariageState {
@@ -28,7 +29,7 @@ export default class MariageStore implements Module<MariageState, any> {
     imgFolderVictory(state: MariageState) {
       return `${BASE_URL}images/configuration/victoires/${state.mariage.id}/`
     },
-    getConfig(state: MariageState, code) {
+    getConfig(state: MariageState) {
       return (code: string) => {
         const config = state.mariage.configurations && state.mariage.configurations.find(config => config.code === code);
         return config && config.value;
@@ -97,7 +98,7 @@ export default class MariageStore implements Module<MariageState, any> {
 
   public actions: ActionTree<MariageState, any> = {
     loadConfigurations(context: ActionContext<MariageState, any>) {
-      Vue.$axios.get(`${Urls.MARIAGE}`).then(response => context.commit('mariage', response.data));
+      MariageService.getMariage().then(mariage => context.commit('mariage', mariage))
     },
     setConfig(context: ActionContext<MariageState, any>, newValue: Configuration) {
       context.commit('setConfig', newValue);
@@ -109,7 +110,7 @@ export default class MariageStore implements Module<MariageState, any> {
       context.commit('setConfigurationVictory', newValue);
     },
     save(context: ActionContext<MariageState, any>) {
-      Vue.$axios.patch(`${Urls.MARIAGE}/${context.state.mariage.id}`, context.state.mariage).then(result => context.commit('mariage', result.data));
+      MariageService.updateMariage(context.state.mariage).then(mariage => context.commit('mariage', mariage));
     }
   };
 }

@@ -4,15 +4,19 @@ namespace App\Entity;
 
 use App\Repository\VictoireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=VictoireRepository::class)
+ * @ApiResource
  */
 class Victoire
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=50)
+     * @Groups({"mariage"})
      */
     private $name;
 

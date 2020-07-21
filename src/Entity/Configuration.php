@@ -4,20 +4,26 @@ namespace App\Entity;
 
 use App\Repository\ConfigurationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ConfigurationRepository::class)
+ * @ApiResource
  */
 class Configuration
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=50)
+     * @Groups({"mariage"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"mariage"})
      */
     private $value;
 
@@ -27,11 +33,6 @@ class Configuration
      * @ORM\JoinColumn(referencedColumnName="id", nullable=false)
      */
     private $mariage;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getCode(): ?string
     {

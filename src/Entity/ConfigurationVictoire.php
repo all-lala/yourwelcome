@@ -4,26 +4,33 @@ namespace App\Entity;
 
 use App\Repository\ConfigurationVictoireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ConfigurationVictoireRepository::class)
+ * @ApiResource
  */
 class ConfigurationVictoire
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=50)
+     * @Groups({"mariage"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"mariage"})
      */
     private $value;
 
     /**
+     * @ORM\Id()
      * @ORM\ManyToOne(targetEntity=Victoire::class)
      * @ORM\JoinColumn(name="victoire", referencedColumnName="name", nullable=false)
+     * @Groups({"mariage"})
      */
     private $victoire;
 

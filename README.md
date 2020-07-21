@@ -33,7 +33,7 @@ Créer la DB et jouer les migrations
 
 ## TODO:
 - Theme :
-	- Roue de la fiortune
+	- Roue de la fortune
 	- Image Fixe
 	- Images Scindés
 	- Video

@@ -2,6 +2,9 @@ import ConfigurationsTheme from './configurationsTheme.model';
 import ConfigurationsVictoire from './configurationsVictoire.model';
 
 export default class Mariage {
+
+  public iri?: string;
+  
   public id?: number;
 
   public nom?: string;

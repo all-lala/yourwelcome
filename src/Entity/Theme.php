@@ -4,15 +4,23 @@ namespace App\Entity;
 
 use App\Repository\ThemeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiProperty;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\Collection;
+
 
 /**
  * @ORM\Entity(repositoryClass=ThemeRepository::class)
+ * @ApiResource
  */
 class Theme
 {
     /**
      * @ORM\Id()
      * @ORM\Column(type="string", length=50)
+     * @Groups({"mariage"})
+     * @ApiProperty(identifier=true)
      */
     private $name;
 
@@ -40,6 +48,11 @@ class Theme
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
+    
+    /**
+     * @ORM\OneToMany(targetEntity=ConfigurationTheme::class, mappedBy="theme", orphanRemoval=true, cascade={"persist", "remove"})
+     */
+    private $configurationsTheme;
 
     public function getName(): ?string
     {
@@ -110,6 +123,37 @@ class Theme
     {
         $this->image = $image;
 
+        return $this;
+    }
+    
+    /**
+     * @return Collection|ConfigurationTheme[]
+     */
+    public function getConfigurationsTheme(): Collection
+    {
+        return $this->configurationsTheme;
+    }
+    
+    public function addConfigurationTheme(ConfigurationTheme $configurationTheme): self
+    {
+        if (!$this->configurationsTheme->contains($configurationTheme)) {
+            $this->configurationsTheme[] = $configurationTheme;
+            $configurationTheme->setTheme($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeConfigurationTheme(ConfigurationTheme $configurationTheme): self
+    {
+        if ($this->configurationsTheme->contains($configurationTheme)) {
+            $this->configurationsTheme->removeElement($configurationTheme);
+            // set the owning side to null (unless already changed)
+            if ($configurationTheme->getMariage() === $this) {
+                $configurationTheme->setTheme(null);
+            }
+        }
+        
         return $this;
     }
 }

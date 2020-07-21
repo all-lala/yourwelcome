@@ -4,12 +4,12 @@ import AuthUtils from '@/utils/auth.utils';
 declare var BASE_URL: any;
 
 // Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 const config: AxiosRequestConfig = {
-  baseURL: `${BASE_URL}api` || '',
+  baseURL: `${BASE_URL ? BASE_URL.replace(/[\\\/]$/, '') : ''}`,
+  headers: {
+    'Content-type': 'application/ld+json'
+  }
 };
 
 const _axios = axios.create(config);

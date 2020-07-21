@@ -1,6 +1,9 @@
 import Invite from './invite.model';
 
 export default class Table {
+
+  public iri?: string;
+
   public id?: number;
 
   public nom: string = "";
@@ -9,25 +12,15 @@ export default class Table {
 
   public couleur: string = '#00000000';
 
-  public realImg: HTMLCanvasElement | null = null;
-
   public invites: Invite[] = [];
 
-  public setInvites(invites: Invite[]) {
-    this.invites = invites;
-  }
-
-  public addInvite(invite: Invite) {
-    if (!this.invites.includes(invite)) {
-      const newInvite = invite;
-      newInvite.table = this;
-      this.invites.push({ ...invite, ...{ table: undefined } });
+  public addInvite(invite: Invite): Table {
+    let exist = this.invites.find(inv => inv.iri === invite.iri)
+    if (exist) {
+      exist = invite;
+    } else {
+      this.invites.push(invite);
     }
-  }
-
-  public removeInvite(invite: Invite) {
-    this.invites = this.invites.filter(inv => inv.id !== invite.id);
-    const newInvite = invite;
-    newInvite.table = undefined;
+    return this;
   }
 }

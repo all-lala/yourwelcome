@@ -16,9 +16,9 @@ fos_rest:
 #            App\Exception\MyException: Forbidden area.
     format_listener:
         rules:
-            - { path: ^/api, priorities: [ json ] }
+            - { path: ^/api/old, priorities: [ json ] }
     zone:
-        - { path: ^/api/* }
+        - { path: ^/api/old/* }
     body_converter:
         enabled: true
     body_listener:

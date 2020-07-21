@@ -1,7 +1,6 @@
-import Vue from 'vue';
 import Theme from "@/models/theme.model";
 import { Module, MutationTree, ActionTree, GetterTree } from 'vuex';
-import Urls from '@/utils/urls';
+import ThemeService from '@/service/theme.service';
 
 interface ThemeStoreState {
   themes: Theme[];
@@ -33,7 +32,7 @@ export default class ThemeStore implements Module<ThemeStoreState, any> {
 
   actions: ActionTree<ThemeStoreState, any> = {
     loadThemes(context) {
-      Vue.$axios.get(`${Urls.THEME}`).then(response => context.commit('themes', response.data));
+      ThemeService.getThemes().then(themes => context.commit('themes', themes))
     },
   }
 }
